@@ -1,0 +1,25 @@
+-- Create a knife store database
+
+CREATE TABLE knife_store (id INTEGER PRIMARY KEY, name TEXT, price INTEGER, length INTEGER, weight INTEGER);
+
+INSERT INTO knife_store VALUES (1, "Chef ", 65, 8, 700);
+INSERT INTO knife_store VALUES (2, "Utility", 50, 5, 250);
+INSERT INTO knife_store VALUES (3, "Paring", 12, 3, 112);
+INSERT INTO knife_store VALUES (4, "Santoku", 55, 6, 300);
+INSERT INTO knife_store VALUES (5, "Boning", 30, 6, 136);
+INSERT INTO knife_store VALUES (6, "Bread", 23, 10, 185);
+INSERT INTO knife_store VALUES (7, "Cleaver", 105, 10, 1315);
+INSERT INTO knife_store VALUES (8, "Steak", 30, 4, 80);
+
+--Display the database ordered by price
+SELECT * FROM knife_store ORDER BY price desc;
+
+--What is the avg price of a kitchen knife?
+SELECT AVG(price) "avg knife cost" 
+    FROM knife_store;
+    
+--What are the 3 heaviest knives?
+SELECT name AS "knife type", weight
+FROM knife_store
+ORDER BY weight desc
+LIMIT 3;
