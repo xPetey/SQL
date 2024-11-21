@@ -57,7 +57,18 @@ VALUES
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
 
---Based off of maternity leave time offered, assign all companies in the Technology industry a baby tolerance level.
+# Analysis:
+
+
+# Which company has the highest average employment tenure within each industry?
+SELECT company_name
+,industry
+,MAX(avg_employee_tenure) AS years_at_company
+FROM fortune_companies
+GROUP BY industry;
+
+
+# Based off of maternity leave time offered, assign all companies in the Technology industry a baby tolerance level.
 SELECT company_name,
 CASE WHEN maternity_leave_weeks >= 12 THEN "Baby Encouraged"
 WHEN maternity_leave_weeks >= 10 THEN "Baby Welcomed"
@@ -68,11 +79,24 @@ FROM fortune_companies
 WHERE industry = "Technology";
 
 
---What companies have an average revenue of at least $250 billion, and have less then 50k employees?
+# What companies have an average revenue of at least $250 billion, and have less then 50k employees?
 SELECT company_name, industry, ROUND(AVG(revenue),1) as avg_revenue_billions
 FROM fortune_companies
 WHERE employees <= 50000
 GROUP BY company_name
 HAVING AVG(revenue) >= 250
 ORDER BY avg_revenue_billions desc;
+
+
+# What companies have more then 15 paid time off days and healthcare benefits, and how many paid time off days are there?
+SELECT company_name, paid_time_off_days AS PTO
+FROM fortune_companies
+WHERE paid_time_off_days >= 15
+AND healthcare_benefits = 1;
+
+
+# Which company in the Finance industry has the most revenue, and what's their revenue?
+SELECT company_name, MAX(revenue)
+FROM fortune_companies
+WHERE industry = "Finance";
 
